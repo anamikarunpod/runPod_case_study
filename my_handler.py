@@ -19,7 +19,7 @@ def handler(event, context=None):
     # Parse input
     try:
         body = event.get("input", {})
-        prompt = body.get("prompt", "A futuristic cityscape at sunset")
+        prompt = body.get("prompt", "A kid in a spacesuit")
     except json.JSONDecodeError:
         return {"statusCode": 400, "body": "Invalid JSON input."}
 
