@@ -1,24 +1,21 @@
 FROM pytorch/pytorch:2.1.0-cuda12.1-cudnn8-runtime
 
-# Set working directory
 WORKDIR /app
-
-# Copy code
 COPY my_handler.py /app/my_handler.py
 
-# Install dependencies to call huggingface
 RUN pip install --upgrade pip
-RUN pip install torch diffusers runpod transformers accelerate huggingface_hub
+RUN pip install torch diffusers runpod transformers accelerate huggingface_hub sentencepiece protobuf
 
-# Set environment variables
+ARG HF_TOKEN
+ENV HUGGINGFACE_HUB_TOKEN=${HF_TOKEN}
+
 ENV MODEL_DIR=/app/model
 RUN mkdir -p $MODEL_DIR
 
-# Download the Stable Diffusion model (no authentication needed)
-RUN huggingface-cli download stabilityai/stable-diffusion-2-1-base --local-dir $MODEL_DIR --local-dir-use-symlinks False
+RUN huggingface-cli download stabilityai/stable-diffusion-3.5-large \
+    --local-dir $MODEL_DIR \
+    --local-dir-use-symlinks False \
+    --token $HUGGINGFACE_HUB_TOKEN
 
-# Expose the port (if required by RunPod)
 EXPOSE 8000
-
-# Set the handler as the entry point
 CMD ["python3", "my_handler.py"]
