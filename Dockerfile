@@ -11,7 +11,7 @@ ENV HUGGINGFACE_HUB_TOKEN=${HF_TOKEN}
 
 ENV MODEL_DIR=/app/model
 RUN mkdir -p $MODEL_DIR
-
+# run
 RUN huggingface-cli download stabilityai/stable-diffusion-3.5-large \
     --local-dir $MODEL_DIR \
     --local-dir-use-symlinks False \
