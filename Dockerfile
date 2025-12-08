@@ -6,7 +6,7 @@ COPY my_handler.py /app/my_handler.py
 RUN pip install --upgrade pip
 RUN pip install torch diffusers runpod transformers accelerate huggingface_hub sentencepiece protobuf
 
-ARG HF_TOKEN
+ARG HF_TOKEN=""
 ENV HUGGINGFACE_HUB_TOKEN=${HF_TOKEN}
 
 ENV MODEL_DIR=/app/model
