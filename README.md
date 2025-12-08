@@ -58,7 +58,7 @@ Finally, the _Metrics_ tab shows an overview of the number of requests over vari
 
 - **Testing the Endpoint**: Now that I know that my serverless endpoint is up & running, I decided to create a quick React app in [Github](https://github.com/anamika8/runpod_frontend) that will accept a text prompt, call this endpoint deployed to my RunPod platform and display the image based on the response.
 
--- The React App has a simple UI to accept a search prompt.
+-- The React App has a simple UI to accept a search prompt..
 
 -- It uses it to trigger the image generation process via a POST request to the Serverless Endpoint.
 
