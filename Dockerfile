@@ -15,13 +15,13 @@ ENV MODEL_DIR=/app/model
 RUN mkdir -p "$MODEL_DIR"
 
 # (Optional) fail fast if token not provided
-RUN test -n "$HF_TOKEN" || (echo "HF_TOKEN build-arg is required" && exit 1)
+RUN test -n $HF_TOKEN || (echo "HF_TOKEN build-arg is required" && exit 1)
 
 # run
-RUN huggingface-cli download "$MODEL_ID" \
-    --local-dir "$MODEL_DIR" \
+RUN huggingface-cli download $MODEL_ID \
+    --local-dir $MODEL_DIR \
     --local-dir-use-symlinks False \
-    --token "$HF_TOKEN"
+    --token $HF_TOKEN
 
 EXPOSE 8000
 CMD ["python3", "my_handler.py"]
