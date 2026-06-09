@@ -20,7 +20,6 @@ RUN test -n $HF_TOKEN || (echo "HF_TOKEN build-arg is required" && exit 1)
 # run
 RUN hf download $MODEL_ID \
     --local-dir $MODEL_DIR \
-    --local-dir-use-symlinks False \
     --token $HF_TOKEN
 
 EXPOSE 8000
