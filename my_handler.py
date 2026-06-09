@@ -4,7 +4,7 @@ from diffusers import StableDiffusionPipeline, EulerDiscreteScheduler
 import base64
 import torch
 
-model_id = "stabilityai/stable-diffusion-2-1-base"
+model_id = "stabilityai/stable-diffusion-3.5-large"
 # Define model path inside the container
 MODEL_PATH = "/app/model"
 

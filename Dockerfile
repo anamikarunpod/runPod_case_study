@@ -1,24 +1,26 @@
 FROM pytorch/pytorch:2.1.0-cuda12.1-cudnn8-runtime
 
-# Set working directory
 WORKDIR /app
-
-# Copy code
 COPY my_handler.py /app/my_handler.py
 
-# Install dependencies to call huggingface
 RUN pip install --upgrade pip
-RUN pip install torch diffusers runpod transformers accelerate huggingface_hub
+RUN pip install torch diffusers runpod transformers accelerate huggingface_hub sentencepiece protobuf
 
-# Set environment variables
+# Build-time inputs (ONLY available during docker build)
+ARG HF_TOKEN
+ARG MODEL_ID="stabilityai/stable-diffusion-3.5-large"
+
+# Where to store the model in the image
 ENV MODEL_DIR=/app/model
-RUN mkdir -p $MODEL_DIR
+RUN mkdir -p "$MODEL_DIR"
 
-# Download the Stable Diffusion model (no authentication needed)
-RUN huggingface-cli download stabilityai/stable-diffusion-2-1-base --local-dir $MODEL_DIR --local-dir-use-symlinks False
+# (Optional) fail fast if token not provided
+RUN test -n $HF_TOKEN || (echo "HF_TOKEN build-arg is required" && exit 1)
 
-# Expose the port (if required by RunPod)
+# run
+RUN hf download $MODEL_ID \
+    --local-dir $MODEL_DIR \
+    --token $HF_TOKEN
+
 EXPOSE 8000
-
-# Set the handler as the entry point
 CMD ["python3", "my_handler.py"]

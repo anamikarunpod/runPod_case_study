@@ -1,6 +1,6 @@
 # Overview
 
-Using the RunPod platform to deploy a serverless endpoint running a machine learning model. The endpoint should be capable of receiving a request and generating a corresponding response.
+Using the RunPod platform to deploy a serverless endpoint running a machine learning model. The endpoint should be capable of receiving a request and generating a corresponding response.- 
 
 ## runPod_case_study
 
@@ -16,7 +16,7 @@ The platform provides AI endpoints tailored for inference workloads, ensuring se
 
 - Deploy a serverless endpoint on the RunPod platform.
 
-- Test that the serverless endpoint is able to receive an input (via text) and return an appropriate image for display
+- Test that the serverless endpoint is able to receive an input (via text) and return an appropriate image for display.
 
 ## Solution
 
