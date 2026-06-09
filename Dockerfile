@@ -21,8 +21,7 @@ RUN test -n $HF_TOKEN || (echo "HF_TOKEN build-arg is required" && exit 1)
 RUN huggingface-cli download $MODEL_ID \
     --local-dir $MODEL_DIR \
     --local-dir-use-symlinks False \
-    --token $HF_TOKEN \
-    --verbose
+    --token $HF_TOKEN
 
 EXPOSE 8000
 CMD ["python3", "my_handler.py"]
